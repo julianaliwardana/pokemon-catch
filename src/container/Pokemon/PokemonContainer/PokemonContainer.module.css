@@ -1,0 +1,38 @@
+.pokemon-catch {
+  min-height: 100vh;
+  background-color: white;
+}
+
+.container {
+  max-width: 90%;
+  margin-inline: auto;
+}
+
+.container > * ~ * {
+  padding-block: 1rem;
+}
+
+.title {
+  text-align: center;
+  font: 32px;
+  font-weight: bold;
+  text-decoration: underline;
+  color: black;
+  /* padding-top: 4rem; */
+  padding-block: 3rem;
+}
+
+.info {
+  display: flex;
+  justify-content: center;
+}
+
+.form {
+  display: flex;
+  margin: auto;
+  width: 50%;
+}
+
+.search {
+  margin-right: 20px;
+}

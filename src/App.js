@@ -1,11 +1,8 @@
-import './App.css';
-import { Button } from 'react-bootstrap';
+import { PokemonContainer } from './container';
 
 function App() {
   return (
-    <div className="App">
-      <Button variant='primary'>Halo</Button>
-    </div>
+    <PokemonContainer />
   );
 }
 
