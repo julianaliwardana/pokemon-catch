@@ -1,8 +1,11 @@
 import { PokemonContainer } from './container';
+import { PokemonProvider } from './context';
 
 function App() {
   return (
-    <PokemonContainer />
+    <PokemonProvider>
+        <PokemonContainer />
+    </PokemonProvider>
   );
 }
 
