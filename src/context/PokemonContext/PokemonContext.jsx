@@ -4,6 +4,8 @@ const PokemonContext = createContext();
 
 export const PokemonProvider = ({ children }) => {
   const [listPokemon, setListPokemon] = useState([]);
+  const [listPokemonInBag, setListPokemonInBag] = useState([]);
+  const [pokemonData, setPokemonData] = useState({});
 
   useEffect(() => {
     // Fetch Pokemon Data List
@@ -21,6 +23,10 @@ export const PokemonProvider = ({ children }) => {
 
   const value = {
     listPokemon,
+    pokemonData,
+    setPokemonData,
+    listPokemonInBag,
+    setListPokemonInBag,
   };
   return <PokemonContext.Provider value={value}>{children}</PokemonContext.Provider>;
 };

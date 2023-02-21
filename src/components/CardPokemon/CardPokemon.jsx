@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import styles from './CardPokemon.module.css';
 import { NoImagePokemon } from '../../assets';
 import { PokemonContext } from '../../context';
@@ -6,26 +6,24 @@ import { Row, Col, Card, Table } from 'react-bootstrap';
 
 const CardPokemon = (pokemonName) => {
   const pokemonCtx = useContext(PokemonContext);
-  const [pokemonData, setPokemonData] = useState({});
 
-  const types = pokemonData.types
-  ? pokemonData.types.slice(0, 5)
+  const types = pokemonCtx.pokemonData.types
+  ? pokemonCtx.pokemonData.types.slice(0, 5)
   : [];
-  const stats = pokemonData.stats;
+  const stats = pokemonCtx.pokemonData.stats;
 
   // console.log(pokemonCtx.listPokemon);
 
   useEffect(() => {
     for (let i = 0; i < 1000; i++) {
       if (pokemonCtx.listPokemon[i] && pokemonCtx.listPokemon[i].name === pokemonName.pokemonName) {
-        console.log("true");
         fetch(pokemonCtx.listPokemon[i].url)
         .then((res) => res.json())
-          .then((data) => setPokemonData(data))
+          .then((data) => pokemonCtx.setPokemonData(data))
           .catch((e) => console.error(e.message));
       }
     }
-  }, [pokemonCtx.listPokemon, pokemonName]);
+  }, [pokemonCtx, pokemonCtx.listPokemon, pokemonName]);
 
   return (
     <Card className={styles['card']}>
@@ -37,11 +35,11 @@ const CardPokemon = (pokemonName) => {
                   <tbody>
                     <tr>
                       <th colSpan={2} width={'20%'}>ID</th>
-                      <td colSpan={2} width={'30%'}>{pokemonData.id}</td>
+                      <td colSpan={2} width={'30%'}>{pokemonCtx.pokemonData.id}</td>
                     </tr>
                     <tr>
                       <th colSpan={2}>Name</th>
-                      <td colSpan={2}>{pokemonData.name}</td>
+                      <td colSpan={2}>{pokemonCtx.pokemonData.name}</td>
                     </tr>
                     <tr>
                       <th colSpan={2}>Types</th>
@@ -49,7 +47,7 @@ const CardPokemon = (pokemonName) => {
                     </tr>
                     <tr>
                       <th colSpan={2}>Height</th>
-                      <td colSpan={2}>{pokemonData.height}</td>
+                      <td colSpan={2}>{pokemonCtx.pokemonData.height}</td>
                     </tr>
                   </tbody>
                 </Table>
@@ -99,9 +97,9 @@ const CardPokemon = (pokemonName) => {
                 </Row>
               </Card.Body>
             </Col>
-            <Col lg={4}>
+            <Col lg={4} className={styles['col-image']}>
                 <Card.Img variant="top" src={
-                  pokemonData.sprites ? pokemonData.sprites.front_default : NoImagePokemon
+                  pokemonCtx.pokemonData.sprites ? pokemonCtx.pokemonData.sprites.front_default : NoImagePokemon
                 } className={styles['card-image']}/>
             </Col>
           </Row>

@@ -8,10 +8,19 @@
   box-shadow: 8px 8px 0px rgba(0, 0, 0);
 }
 
+.col-image {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 64%;
+  /* -ms-transform: translateY(-50%); */
+  transform: translateY(-50%);
+}
+
 .card-image {
-  border: 2px solid black;
-  width: 200px;
-  height: 200px;
+  /* border: 2px solid black; */
+  width: 250px;
+  height: 250px;
 }
 
 .pokemon-main-info {

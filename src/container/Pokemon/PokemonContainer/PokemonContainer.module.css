@@ -12,6 +12,15 @@
   padding-block: 1rem;
 }
 
+.nav {
+  position: relative;
+}
+
+.float-button {
+  margin-top: 20px;
+  float: right;
+}
+
 .title {
   text-align: center;
   font: 32px;
