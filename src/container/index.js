@@ -1,3 +1,4 @@
 import { PokemonContainer } from './Pokemon';
+import { BagContainer } from './Bag';
 
-export { PokemonContainer };
+export { PokemonContainer, BagContainer };

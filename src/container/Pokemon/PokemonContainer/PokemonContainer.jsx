@@ -1,4 +1,5 @@
 import React, { useRef, useState, useContext } from 'react';
+import { Link } from 'react-router-dom'
 import { Form, Button, Row, Col }from 'react-bootstrap';
 import { CardPokemon } from '../../../components';
 import { PokemonContext } from '../../../context';
@@ -44,7 +45,7 @@ const PokemonContainer = () => {
                 height: "75px",
                 boxShadow: "0px 0px 11px 0px rgba(0,0,0,0.24)"
               }
-              }>BAG</Button>
+              }><Link to="/bag">BAG</Link></Button>
           </div>
           <h1 className={styles['title']}>List Of Pokemon</h1>
         </section>
