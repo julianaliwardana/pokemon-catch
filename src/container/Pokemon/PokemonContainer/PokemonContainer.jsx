@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { Form, Button }from 'react-bootstrap';
+import { Form, Button, Row, Col }from 'react-bootstrap';
 import { CardPokemon } from '../../../components';
 import styles from './PokemonContainer.module.css';
 
@@ -9,8 +9,11 @@ const PokemonContainer = () => {
 
   const [value, setValue] = useState('');
 
-  const handleClick = () => {
+  const searchHandleClick = () => {
     setValue(inputRef.current.value);
+  };
+  const clearHandleClick = () => {
+    setValue('');
   };
 
   return (
@@ -25,10 +28,31 @@ const PokemonContainer = () => {
               className={styles['search']}
               aria-label="Search"
             />
-            <Button variant="outline-success" onClick={handleClick}>Search</Button>
+            <Button variant="outline-success" onClick={searchHandleClick}>Search</Button>
           </Form>
         <div className={styles['info']}>
           <CardPokemon pokemonName={value} />
+        </div>
+        <div className={styles['footer']}>
+          {
+            value ?
+            <Row>
+              <Col lg={6} className={styles['clear-button']}>
+                <Button
+                  variant='light'
+                  style={{fontWeight:'bold', boxShadow: '0px 0px 10px 1px rgba(0,0,0,0.32)'}}
+                  onClick={clearHandleClick}>CLEAR</Button>
+              </Col>
+              <Col lg={6} className={styles['catch-button']}>
+                <Button
+                  variant='warning'
+                  style={{color:'white', fontWeight:'bold', boxShadow: '0px 0px 10px 1px rgba(0,0,0,0.32)'}}
+                  onClick={clearHandleClick}>TANGKAP</Button>
+              </Col>
+            </Row>
+            :
+            <Row></Row>
+          }
         </div>
       </div>
     </section>
