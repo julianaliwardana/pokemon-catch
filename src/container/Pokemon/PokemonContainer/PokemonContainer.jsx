@@ -17,6 +17,11 @@ const PokemonContainer = () => {
     setValue('');
   };
 
+  const handleKeypress = e => {
+    console.log("masuk");
+    setValue(inputRef.current.value);
+  };
+
   const catchHandleClick = () => {
     console.log(pokemonCtx.pokemonData);
     pokemonCtx.setListPokemonInBag([pokemonCtx.pokemonData]);
@@ -50,6 +55,7 @@ const PokemonContainer = () => {
             placeholder="Search"
             className={styles['search']}
             aria-label="Search"
+            onKeyUp={handleKeypress}
           />
           <Button variant="outline-success" onClick={searchHandleClick}>Search</Button>
         </Form>
