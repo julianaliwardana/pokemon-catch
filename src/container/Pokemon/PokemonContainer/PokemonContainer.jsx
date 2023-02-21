@@ -36,16 +36,19 @@ const PokemonContainer = () => {
       <div className={styles['container']}>
         <section className={styles['nav']}>
           <div className={styles['float-button']}>
-            <Button style={
-              {
-                color: "black",
-                border: "none",
-                backgroundColor: "#FFFF",
-                width: "75px",
-                height: "75px",
-                boxShadow: "0px 0px 11px 0px rgba(0,0,0,0.24)"
-              }
-              }><Link to="/bag">BAG</Link></Button>
+            <Link to="/bag">
+              <Button style={
+                {
+                  color: "black",
+                  border: "none",
+                  fontWeight: "bold",
+                  backgroundColor: "#FFFF",
+                  width: "75px",
+                  height: "75px",
+                  boxShadow: "0px 0px 11px 0px rgba(0,0,0,0.24)"
+                }
+              }>BAG</Button>
+            </Link>
           </div>
           <h1 className={styles['title']}>List Of Pokemon</h1>
         </section>
