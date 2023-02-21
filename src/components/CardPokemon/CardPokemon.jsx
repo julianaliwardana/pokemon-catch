@@ -57,7 +57,12 @@ const CardPokemon = (pokemonName) => {
                       <tbody>
                         <tr bgcolor='#8EEB9A'>
                           <th>HP</th>
-                          <td width={'20%'}>{stats && stats[0].base_stat}</td>
+                          {
+                            (stats && stats[0].base_stat) >= 50 ?
+                            <td width={'20%'} style={{color: "black", fontWeight: "bold"}}>{(stats && stats[0].base_stat)}</td>
+                            :
+                            <td width={'20%'} style={{color: "red", fontWeight: "bold"}}>{(stats && stats[0].base_stat)}</td>
+                          }
                         </tr>
                       </tbody>
                     </Table>
