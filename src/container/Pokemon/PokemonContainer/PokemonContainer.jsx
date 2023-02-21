@@ -28,7 +28,6 @@ const PokemonContainer = () => {
             <Button variant="outline-success" onClick={handleClick}>Search</Button>
           </Form>
         <div className={styles['info']}>
-          <h1>Pokemon Name: {value}</h1>
           <CardPokemon pokemonName={value} />
         </div>
       </div>
