@@ -1,6 +1,7 @@
 // import React, { useRef, useState, useContext } from 'react';
 import { Link } from "react-router-dom";
 import { Button }from 'react-bootstrap';
+import { CardBag } from '../../../components';
 // import { CardPokemon } from '../../../components';
 // import { PokemonContext } from '../../../context';
 import styles from './BagContainer.module.css';
@@ -29,7 +30,7 @@ const PokemonContainer = () => {
                     <h1 className={styles['title']}>BAG ITEM</h1>
                 </section>
                 <div className={styles['info']}>
-                    {/* <CardPokemon pokemonName={value} /> */}
+                    <CardBag />
                 </div>
             </div>
         </section>

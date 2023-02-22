@@ -28,11 +28,10 @@
   text-decoration: underline;
   color: black;
   /* padding-top: 4rem; */
-  padding-block: 3rem;
+  padding-block: 1rem;
 }
 
 .info {
-  display: flex;
   justify-content: center;
 }
 
