@@ -26,7 +26,7 @@ const PokemonContainer = () => {
                         }>BACK</Button>
                         </Link>
                     </div>
-                    <h1 className={styles['title']}>Bag</h1>
+                    <h1 className={styles['title']}>BAG ITEM</h1>
                 </section>
                 <div className={styles['info']}>
                     {/* <CardPokemon pokemonName={value} /> */}

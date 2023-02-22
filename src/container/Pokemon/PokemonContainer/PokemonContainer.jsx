@@ -7,12 +7,9 @@ import styles from './PokemonContainer.module.css';
 
 const PokemonContainer = () => {
     const inputRef = useRef(null);
+
     const [value, setValue] = useState('');
     const pokemonCtx = useContext(PokemonContext);
-
-    const searchHandleClick = () => {
-        setValue(inputRef.current.value);
-    };
 
     const clearHandleClick = () => {
         setValue('');
@@ -61,7 +58,6 @@ const PokemonContainer = () => {
                     aria-label="Search"
                     onKeyUp={handleKeypress}
                 />
-                <Button variant="outline-success" onClick={searchHandleClick}>Search</Button>
                 </Form>
                 <div className={styles['info']}>
                     <CardPokemon pokemonName={value} />
