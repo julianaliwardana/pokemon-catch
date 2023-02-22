@@ -7,7 +7,6 @@ import styles from './PokemonContainer.module.css';
 
 const PokemonContainer = () => {
     const inputRef = useRef(null);
-    const [count, setCount] = useState(0);
     const [value, setValue] = useState('');
     const pokemonCtx = useContext(PokemonContext);
 
@@ -20,17 +19,19 @@ const PokemonContainer = () => {
         setValue(inputRef.current.value);
     };
 
+    console.log(pokemonCtx.count);
+
     const catchHandleClick = () => {
         console.log(pokemonCtx.pokemonData);
-        if (count === 0) {
-            console.log(count);
+        if (pokemonCtx.count === 0) {
+            console.log(pokemonCtx.count);
             localStorage.setItem("Pokemons", JSON.stringify([pokemonCtx.pokemonData]));
         } else {
-            console.log(count);
+            console.log(pokemonCtx.count);
             let oldData = JSON.parse(localStorage.getItem('Pokemons'));
             localStorage.setItem("Pokemons", JSON.stringify([...oldData, pokemonCtx.pokemonData]));
         }
-        setCount(count + 1);
+        pokemonCtx.setCount(pokemonCtx.count + 1);
         setValue('');
     }
 
