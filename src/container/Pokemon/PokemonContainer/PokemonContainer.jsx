@@ -7,7 +7,7 @@ import styles from './PokemonContainer.module.css';
 
 const PokemonContainer = () => {
     const inputRef = useRef(null);
-
+    const [count, setCount] = useState(0);
     const [value, setValue] = useState('');
     const pokemonCtx = useContext(PokemonContext);
 
@@ -22,9 +22,15 @@ const PokemonContainer = () => {
 
     const catchHandleClick = () => {
         console.log(pokemonCtx.pokemonData);
-        pokemonCtx.setListPokemonInBag([pokemonCtx.pokemonData]);
-        pokemonCtx.setListPokemonInBag([...pokemonCtx.listPokemonInBag, pokemonCtx.pokemonData]);
-        localStorage.setItem("Pokemons", JSON.stringify(pokemonCtx.listPokemonInBag));
+        if (count === 0) {
+            console.log(count);
+            localStorage.setItem("Pokemons", JSON.stringify([pokemonCtx.pokemonData]));
+        } else {
+            console.log(count);
+            let oldData = JSON.parse(localStorage.getItem('Pokemons'));
+            localStorage.setItem("Pokemons", JSON.stringify([...oldData, pokemonCtx.pokemonData]));
+        }
+        setCount(count + 1);
         setValue('');
     }
 
@@ -32,33 +38,33 @@ const PokemonContainer = () => {
         <section className={styles['pokemon-catch']}>
             <div className={styles['container']}>
                 <section className={styles['nav']}>
-                <div className={styles['float-button']}>
-                    <Link to="/bag">
-                    <Button style={
-                        {
-                        color: "black",
-                        border: "none",
-                        fontWeight: "bold",
-                        backgroundColor: "#FFFF",
-                        width: "75px",
-                        height: "75px",
-                        boxShadow: "0px 0px 11px 0px rgba(0,0,0,0.24)"
-                        }
-                    }>BAG</Button>
-                    </Link>
-                </div>
-                <h1 className={styles['title']}>List Of Pokemon</h1>
+                    <div className={styles['float-button']}>
+                        <Link to="/bag">
+                        <Button style={
+                            {
+                            color: "black",
+                            border: "none",
+                            fontWeight: "bold",
+                            backgroundColor: "#FFFF",
+                            width: "75px",
+                            height: "75px",
+                            boxShadow: "0px 0px 11px 0px rgba(0,0,0,0.24)"
+                            }
+                        }>BAG</Button>
+                        </Link>
+                    </div>
+                    <h1 className={styles['title']}>List Of Pokemon</h1>
                 </section>
                 <Form className={styles['form']}>
-                <Form.Control
-                    type="search"
-                    ref={inputRef}
-                    placeholder="Search"
-                    className={styles['search']}
-                    aria-label="Search"
-                    onKeyUp={handleKeypress}
-                />
-                </Form>
+                    <Form.Control
+                        type="search"
+                        ref={inputRef}
+                        placeholder="Search"
+                        className={styles['search']}
+                        aria-label="Search"
+                        onKeyUp={handleKeypress}
+                    />
+                    </Form>
                 <div className={styles['info']}>
                     <CardPokemon pokemonName={value} />
                 </div>
