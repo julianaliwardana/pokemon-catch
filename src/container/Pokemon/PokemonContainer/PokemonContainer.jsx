@@ -9,27 +9,37 @@ const PokemonContainer = () => {
     const inputRef = useRef(null);
     const [value, setValue] = useState('');
     const pokemonCtx = useContext(PokemonContext);
+    let [store, setStore] = useState(false)
 
     const clearHandleClick = () => {
         setValue('');
     };
 
     const handleKeypress = e => {
-        console.log("masuk");
         setValue(inputRef.current.value);
     };
 
     console.log(pokemonCtx.count);
 
     const catchHandleClick = () => {
-        console.log(pokemonCtx.pokemonData);
         if (pokemonCtx.count === 0) {
-            console.log(pokemonCtx.count);
             localStorage.setItem("Pokemons", JSON.stringify([pokemonCtx.pokemonData]));
         } else {
-            console.log(pokemonCtx.count);
             let oldData = JSON.parse(localStorage.getItem('Pokemons'));
-            localStorage.setItem("Pokemons", JSON.stringify([...oldData, pokemonCtx.pokemonData]));
+
+            for (let i = 0; i < oldData.length; i++) {
+                const pokemon = oldData[i];
+                if (pokemonCtx.pokemonData.name === pokemon.name) {
+                    console.log("ADAAAA");
+                    setStore((current) => !current);
+                }
+            }
+
+            if (!store) {
+                localStorage.setItem("Pokemons", JSON.stringify([...oldData, pokemonCtx.pokemonData]));
+                setStore((current) => !current);
+            }
+
         }
         pokemonCtx.setCount(pokemonCtx.count + 1);
         setValue('');
