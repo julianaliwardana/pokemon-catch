@@ -35,9 +35,10 @@
   justify-content: center;
 }
 
-.form {
+.search {
   display: flex;
   margin: auto;
+  max-width: 30rem;
   width: 50%;
 }
 

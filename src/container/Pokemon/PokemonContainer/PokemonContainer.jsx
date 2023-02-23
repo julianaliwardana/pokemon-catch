@@ -1,47 +1,55 @@
-import React, { useRef, useState, useContext } from 'react';
+import React, { useRef, useState, useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom'
 import { Form, Button, Row, Col }from 'react-bootstrap';
 import { CardPokemon } from '../../../components';
 import { PokemonContext } from '../../../context';
 import styles from './PokemonContainer.module.css';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const PokemonContainer = () => {
     const inputRef = useRef(null);
+    const [count, setCount] = useState(0);
     const [value, setValue] = useState('');
     const pokemonCtx = useContext(PokemonContext);
-    let [store, setStore] = useState(false)
+    let oldData = [];
+
+    useEffect(() => {
+        setCount(JSON.parse(window.localStorage.getItem('pokemon-catch-count')));
+    }, []);
 
     const clearHandleClick = () => {
         setValue('');
     };
 
     const handleKeypress = e => {
-        setValue(inputRef.current.value);
+        e.preventDefault();
+        if (e.key === "Enter") {
+            setValue(inputRef.current.value);
+        }
     };
 
-    console.log(pokemonCtx.count);
-
     const catchHandleClick = () => {
-        if (pokemonCtx.count === 0) {
+        if (count === 0) {
             localStorage.setItem("Pokemons", JSON.stringify([pokemonCtx.pokemonData]));
-        } else {
-            let oldData = JSON.parse(localStorage.getItem('Pokemons'));
+        } else if (count > 0) {
+            oldData = JSON.parse(localStorage.getItem('Pokemons'));
+            const isStore = oldData.find((pokemon) => pokemon.name === value)
 
-            for (let i = 0; i < oldData.length; i++) {
-                const pokemon = oldData[i];
-                if (pokemonCtx.pokemonData.name === pokemon.name) {
-                    console.log("ADAAAA");
-                    setStore((current) => !current);
-                }
-            }
-
-            if (!store) {
+            if (isStore === undefined) {
                 localStorage.setItem("Pokemons", JSON.stringify([...oldData, pokemonCtx.pokemonData]));
-                setStore((current) => !current);
+                toast.success('Yeayy you got the pokemon ^_^', {
+                    position: toast.POSITION.TOP_CENTER
+                });
+            } else {
+                console.log("Pokemon already inside the bag");
+                toast.error('Nooo, This Pokemon already inside the bag:(', {
+                    position: toast.POSITION.TOP_CENTER
+                });
             }
-
         }
-        pokemonCtx.setCount(pokemonCtx.count + 1);
+        setCount(count + 1);
+        localStorage.setItem('pokemon-catch-count', count + 1);
         setValue('');
     }
 
@@ -51,22 +59,21 @@ const PokemonContainer = () => {
                 <section className={styles['nav']}>
                     <div className={styles['float-button']}>
                         <Link to="/bag">
-                        <Button style={
-                            {
-                            color: "black",
-                            border: "none",
-                            fontWeight: "bold",
-                            backgroundColor: "#FFFF",
-                            width: "75px",
-                            height: "75px",
-                            boxShadow: "0px 0px 11px 0px rgba(0,0,0,0.24)"
-                            }
-                        }>BAG</Button>
+                            <Button style={
+                                {
+                                color: "black",
+                                border: "none",
+                                fontWeight: "bold",
+                                backgroundColor: "#FFFF",
+                                width: "75px",
+                                height: "75px",
+                                boxShadow: "0px 0px 11px 0px rgba(0,0,0,0.24)"
+                                }
+                            }>BAG</Button>
                         </Link>
                     </div>
                     <h1 className={styles['title']}>List Of Pokemon</h1>
                 </section>
-                <Form className={styles['form']}>
                     <Form.Control
                         type="search"
                         ref={inputRef}
@@ -75,7 +82,6 @@ const PokemonContainer = () => {
                         aria-label="Search"
                         onKeyUp={handleKeypress}
                     />
-                    </Form>
                 <div className={styles['info']}>
                     <CardPokemon pokemonName={value} />
                 </div>
@@ -100,6 +106,7 @@ const PokemonContainer = () => {
                     <Row></Row>
                 }
                 </div>
+                <ToastContainer />
             </div>
         </section>
     );

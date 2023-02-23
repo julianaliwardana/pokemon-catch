@@ -1,20 +1,31 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './CardBag.module.css';
 import { NoImagePokemon } from '../../assets';
 import { Navbar, Badge, Container, Table, Row, Col, Card } from 'react-bootstrap';
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const CardBag = () => {
-    const pokemons = JSON.parse(localStorage.getItem('Pokemons'));
+    const [listPokemon, setListPokemon] = useState([]);
+
+    useEffect(() => {
+        setListPokemon(JSON.parse(localStorage.getItem('Pokemons')));
+    }, []);
 
     const removePokemon = (e, name) => {
         let pokemons = JSON.parse(localStorage.getItem('Pokemons'));
         pokemons = pokemons.filter(pokemon => pokemon.name !== name);
         localStorage.setItem("Pokemons", JSON.stringify(pokemons));
+        setListPokemon(pokemons);
+        toast.success('Your pokemon success to be deleted 👍', {
+            position: toast.POSITION.TOP_CENTER
+        });
     }
 
-    pokemons && pokemons.map((data, index) => console.log(data.types))
+    // pokemons && pokemons.map((data, index) => console.log(data.types))
 
-    const pokemonsInBag = pokemons && pokemons.map((data, index) =>
+    const pokemonsInBag = listPokemon && listPokemon.map((data, index) =>
         <Col lg={4} key={data} className='justify-content-center'>
             <Card className={styles['card']}>
                 <Navbar style={{padding: '0'}}>
@@ -95,6 +106,7 @@ const CardBag = () => {
     return (
         <Row>
             { pokemonsInBag }
+            <ToastContainer />
         </Row>
     );
 };
