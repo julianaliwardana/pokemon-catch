@@ -1,29 +1,47 @@
 import React, { useContext, useEffect } from 'react';
+import axios from "axios";
 import styles from './CardPokemon.module.css';
 import { NoImagePokemon } from '../../assets';
 import { PokemonContext } from '../../context';
+import { GetPokemonList } from "../../api/data";
+import { useDispatch, useSelector } from "react-redux";
 import { Row, Col, Card, Table } from 'react-bootstrap';
 
 const CardPokemon = (pokemonName) => {
     const pokemonCtx = useContext(PokemonContext);
+    const dispatch = useDispatch();
+    const PokemonList = useSelector((state) => state.PokemonList);
+
+    useEffect(() => {
+        FetchData();
+    }, []);
+
+    const FetchData = () => {
+        dispatch(GetPokemonList());
+    };
 
     const types = pokemonCtx.pokemonData.types
     ? pokemonCtx.pokemonData.types.slice(0, 5)
     : [];
     const stats = pokemonCtx.pokemonData.stats;
 
-    // console.log(pokemonCtx.listPokemon);
-
     useEffect(() => {
         for (let i = 0; i < 1000; i++) {
-        if (pokemonCtx.listPokemon[i] && pokemonCtx.listPokemon[i].name === pokemonName.pokemonName) {
-            fetch(pokemonCtx.listPokemon[i].url)
-            .then((res) => res.json())
-            .then((data) => pokemonCtx.setPokemonData(data))
-            .catch((e) => console.error(e.message));
+            if (PokemonList.data[i] && PokemonList.data[i].name === pokemonName.pokemonName) {
+                axios.get(`${PokemonList.data[i].url}`)
+                .then((res) => {
+                    pokemonCtx.setPokemonData(res.data)
+                })
+                .catch(e => console.error(`Error: ${e}`))
+                // fetch(PokemonList.data[i].url)
+                // .then((res) => res.json())
+                // .then((data) => pokemonCtx.setPokemonData(data))
+                // .catch((e) => console.error(e.message));
+            }
         }
-        }
-    }, [pokemonCtx, pokemonCtx.listPokemon, pokemonName]);
+    }, [pokemonCtx, PokemonList.data, pokemonName]);
+
+    console.log(pokemonCtx.pokemonData);
 
     return (
         <Card className={styles['card']}>

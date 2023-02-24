@@ -48,8 +48,9 @@ const PokemonContainer = () => {
                 });
             }
         }
+        console.log(count);
         setCount(count + 1);
-        localStorage.setItem('pokemon-catch-count', count + 1);
+        localStorage.setItem('pokemon-catch-count', count);
         setValue('');
     }
 
