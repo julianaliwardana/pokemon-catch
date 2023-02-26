@@ -33,15 +33,9 @@ const CardPokemon = (pokemonName) => {
                     pokemonCtx.setPokemonData(res.data)
                 })
                 .catch(e => console.error(`Error: ${e}`))
-                // fetch(PokemonList.data[i].url)
-                // .then((res) => res.json())
-                // .then((data) => pokemonCtx.setPokemonData(data))
-                // .catch((e) => console.error(e.message));
             }
         }
     }, [pokemonCtx, PokemonList.data, pokemonName]);
-
-    console.log(pokemonCtx.pokemonData);
 
     return (
         <Card className={styles['card']}>
