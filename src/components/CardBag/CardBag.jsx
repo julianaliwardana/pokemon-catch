@@ -23,8 +23,6 @@ const CardBag = () => {
         });
     }
 
-    // pokemons && pokemons.map((data, index) => console.log(data.types))
-
     const pokemonsInBag = listPokemon && listPokemon.map((data, index) =>
         <Col lg={4} key={data} className='justify-content-center'>
             <Card className={styles['card']}>

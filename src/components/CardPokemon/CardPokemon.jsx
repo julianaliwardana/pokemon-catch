@@ -12,8 +12,6 @@ const CardPokemon = (pokemonName) => {
     : [];
     const stats = pokemonCtx.pokemonData.stats;
 
-    // console.log(pokemonCtx.listPokemon);
-
     useEffect(() => {
         for (let i = 0; i < 1000; i++) {
         if (pokemonCtx.listPokemon[i] && pokemonCtx.listPokemon[i].name === pokemonName.pokemonName) {
