@@ -14,7 +14,7 @@ const CardPokemon = (pokemonName) => {
 
     useEffect(() => {
         FetchData();
-    }, []);
+    });
 
     const FetchData = () => {
         dispatch(GetPokemonList());

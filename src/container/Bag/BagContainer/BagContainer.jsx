@@ -2,12 +2,9 @@
 import { Link } from "react-router-dom";
 import { Button }from 'react-bootstrap';
 import { CardBag } from '../../../components';
-// import { CardPokemon } from '../../../components';
-// import { PokemonContext } from '../../../context';
 import styles from './BagContainer.module.css';
 
-const PokemonContainer = () => {
-    // const pokemonCtx = useContext(PokemonContext);
+const BagContainer = () => {
     return (
         <section className={styles['pokemon-catch']}>
             <div className={styles['container']}>
@@ -37,4 +34,4 @@ const PokemonContainer = () => {
     );
 };
 
-export default PokemonContainer;
+export default BagContainer;
